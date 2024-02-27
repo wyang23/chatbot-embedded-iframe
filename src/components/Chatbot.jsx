@@ -15,12 +15,17 @@ function ChatBot() {
   const [userInput, setUserInput] = useState("");
   const [chatHistory, setChatHistory] = useState([
     {
-      text: "Hello! How can I assist you today?",
+      text: "Hello! I can help you find the computer that is right for you. Can you let me know what you will be using it for or what you are after?",
       sender: "ai",
       timestamp: new Date(),
     },
   ]);
   const [loading, setLoading] = useState(false);
+  const [suggestedReplies, setSuggestedReplies] = useState([
+    "Yes",
+    "No",
+    "Maybe",
+  ]);
 
   const chatContainerRef = useRef(null);
 
@@ -37,11 +42,6 @@ function ChatBot() {
       },
     ]);
 
-    const chatContainer = document.getElementsByClassName("chat-history");
-    console.log(chatContainer);
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    console.log(chatContainer.scrollTop);
     try {
       setLoading(true);
 
@@ -56,6 +56,14 @@ function ChatBot() {
           timestamp: new Date(),
         },
       ]);
+
+      // Show suggested replies if the AI response contains them
+      if (result.response.suggested_replies) {
+        setSuggestedReplies(result.response.suggested_replies);
+      } else {
+        setSuggestedReplies([]);
+      }
+
       setUserInput("");
     } catch (error) {
       console.error(error);
@@ -73,29 +81,44 @@ function ChatBot() {
     }
   };
 
+  const handleSuggestedReplyClick = (reply) => {
+    setUserInput(reply);
+    handleSend();
+  };
+
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
       <div className="chat-history" ref={chatContainerRef}>
         {chatHistory.map((message, index) => (
           <div key={index} className={`chat-box ${message.sender}`}>
-            {message.sender === "user" ? (
-              <AccountCircleOutlinedIcon
-                className="avatar user-avatar"
-                fontSize="large"
-              />
-            ) : (
+            {message.sender === "user" ? null : (
               <SmartToyOutlinedIcon
                 className="avatar ai-avatar"
                 fontSize="large"
+                style={{ color: "#001080" }}
               />
             )}
             <ReactMarkdown>{message.text}</ReactMarkdown>
-            <span className="time-stamp">{message.timestamp.toString()}</span>
+            {/* <span className="time-stamp">{message.timestamp.toString()}</span> */}
           </div>
         ))}
       </div>
       {loading && <div className="loader"></div>}
+
+      {suggestedReplies.length > 0 && (
+        <div className="suggested-replies">
+          {suggestedReplies.map((reply, index) => (
+            <button
+              key={index}
+              className="suggested-reply-button"
+              onClick={() => handleSuggestedReplyClick(reply)}
+            >
+              {reply}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="input-container">
         <input
@@ -108,12 +131,12 @@ function ChatBot() {
           onKeyDown={handleKeyDown}
           endAdornment={
             <InputAdornment position="end">
-              <SearchIcon />
+              <SearchIcon onClick={handleSend} />
             </InputAdornment>
           }
         />
         <span class="icon">
-          <SearchIcon />
+          <SearchIcon onClick={handleSend} />
         </span>
       </div>
     </div>

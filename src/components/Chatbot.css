@@ -5,8 +5,10 @@
   }
   
   .input-text {
-    padding: 30px;
-    width: 100%
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 0px;
   }
   
   
@@ -59,6 +61,20 @@
     background-color: #efefef;
     
   }
+
+  /* .suggested-replies {
+    float: right; } */
+
+    .suggested-reply-button {
+        float: right;
+    margin: 10px;
+    padding: 8px 16px;
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 15px;
+    animation: slideInFromLeft 0.5s ease forwards
+
+  }
   
   @keyframes slideInFromLeft {
     0% {
@@ -83,7 +99,7 @@
   
   
   .chat-box.user {
-    background-color: lightskyblue;
+    background-color: lightgrey;
     /*float: right;*/
     align-self: flex-end; /* User chat boxes aligned to the right */
   
