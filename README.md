@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Embedded chatbot
 
 Creating a chatbot that can be integrated using an embedded iframe
 
