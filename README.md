@@ -16,6 +16,15 @@ Version 1:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+# Mock API Express Server
+
+This express server acts as the endpoint which provides the suggestions provided by the chatbot. 
+
+Picks from 10 predefined laptops and then selects 3 of them and then provides 3 random suggested follow up questions
+
+uses /api/message route
+
 ## Available Scripts
 
 In the project directory, you can run:
