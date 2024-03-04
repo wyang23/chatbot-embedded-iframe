@@ -2,6 +2,13 @@
 
 Creating a chatbot that can be integrated using an embedded iframe
 
+Example Use Case provided: Laptop Recommender 
+
+Tech Stack: React + CSS + express.js server
+
+Version 2:
+
+
 Version 1:
 
 <img width="1483" alt="Screenshot 2024-02-27 at 4 21 22 pm" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/94d9b94e-6a9d-49f4-a105-1f3f75ef1a74">
