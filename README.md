@@ -1,4 +1,31 @@
-# Getting Started with Create React App
+# Embedded chatbot
+
+Creating a chatbot that can be integrated using an embedded iframe
+
+Example Use Case provided: Laptop Recommender 
+
+Tech Stack: React + CSS + express.js server
+
+Version 2:
+<img width="1193" alt="v2github-1" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/ca44a184-15a9-4d94-868e-e36001440201">
+
+<img width="1193" alt="v2github-2" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/d82ef14b-e68f-46da-898e-00b8e9f39bb2">
+
+
+
+Version 1:
+
+<img width="1483" alt="Screenshot 2024-02-27 at 4 21 22 pm" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/94d9b94e-6a9d-49f4-a105-1f3f75ef1a74">
+
+# Mock API Express Server
+
+This express server acts as the endpoint which provides the suggestions provided by the chatbot. 
+
+Picks from 10 predefined laptops and then selects 3 of them and then provides 3 random suggested follow up questions
+
+uses /api/message route
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
