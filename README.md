@@ -1,10 +1,30 @@
-# Embedded chatbot
+# Embedded conversational interface chatbot
 
-Creating a chatbot that can be integrated using an embedded iframe
+Creating a chatbot that can be integrated using an embedded iframe. This is done by building a conversational interface designed to assist users in finding the right computer or laptop based on their needs and preferences. 
 
 Example Use Case provided: Laptop Recommender 
 
 Tech Stack: React + CSS + express.js server
+
+Functionality
+
+Introduction Message: The chatbot starts with an introductory message welcoming the user and asking for information about their computer needs or preferences.
+
+User Input: Users can input their messages or responses to the chatbot's prompts using the text input field provided.
+
+Chat History: The chat history displays the conversation between the user and the chatbot, including messages exchanged and any suggested items provided by the chatbot.
+
+Product Suggestions: Based on the user's input and preferences, the chatbot provides suggestions for suitable computers or laptops. These suggestions include information such as product title, description, SKU, pros, cons, and an image.
+
+Suggested Replies: The chatbot may also offer suggested replies or follow-up questions to guide the conversation and provide further assistance.
+
+Interaction: Users can interact with the chatbot by clicking on suggested replies, which are displayed as buttons below the chat history.
+
+Send Message: Users can send their messages by pressing the "Send" button or hitting the Enter key after typing their message.
+
+Loading Indicator: A loading indicator is displayed while the chatbot is processing user input or fetching data.
+
+Chatbot aims to provide personalized recommendations and assistance to users seeking advice on purchasing a computer or laptop, making the process more interactive and engaging.
 
 Version 2:
 <img width="1193" alt="v2github-1" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/ca44a184-15a9-4d94-868e-e36001440201">
