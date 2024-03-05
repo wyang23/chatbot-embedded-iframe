@@ -1,38 +1,41 @@
-import React, { useState, useRef } from "react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { Header } from "./Header";
+import React, { useState, useEffect, useRef } from "react";
 import "./Chatbot.css";
-import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
 import ReactMarkdown from "react-markdown";
 import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { Header } from "./Header";
 
 function ChatBot() {
-  const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
   const [userInput, setUserInput] = useState("");
   const [chatHistory, setChatHistory] = useState([
     {
       text: "Hello! I can help you find the computer that is right for you. Can you let me know what you will be using it for or what you are after?",
+      suggested_items: null,
+      next_question_suggestions: null,
       sender: "ai",
-      timestamp: new Date(),
     },
   ]);
   const [loading, setLoading] = useState(false);
   const [suggestedReplies, setSuggestedReplies] = useState([
-    "Yes",
-    "No",
-    "Maybe",
+    "I am looking for a work laptop",
+    "I want a laptop for gaming",
+    "I am looking for a laptop for design purposes",
   ]);
 
-  const chatContainerRef = useRef(null);
+  const chatHistoryRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (chatHistoryRef.current) {
+      chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatHistory]);
 
   const handleSend = async () => {
     if (!userInput) return;
 
-    // Add user message to chat history
     setChatHistory((prevMessages) => [
       ...prevMessages,
       {
@@ -44,22 +47,28 @@ function ChatBot() {
 
     try {
       setLoading(true);
-
-      const result = await model.generateContent(userInput);
-      const aiResponse = result.response.text();
-
-      setChatHistory((prevMessages) => [
-        ...prevMessages,
-        {
-          text: aiResponse,
-          sender: "ai",
-          timestamp: new Date(),
+      setSuggestedReplies([]);
+      const response = await fetch("http://localhost:3001/api/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      ]);
+        body: JSON.stringify({ text: userInput }),
+      });
 
-      // Show suggested replies if the AI response contains them
-      if (result.response.suggested_replies) {
-        setSuggestedReplies(result.response.suggested_replies);
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      const newMessage = await response.json();
+      setChatHistory((prevMessages) => [...prevMessages, newMessage]);
+
+      if (newMessage.next_question_suggestions) {
+        const questions = newMessage.next_question_suggestions.map(
+          ({ question_text }) => question_text
+        );
+
+        setSuggestedReplies(questions);
       } else {
         setSuggestedReplies([]);
       }
@@ -71,8 +80,6 @@ function ChatBot() {
       setLoading(false);
     }
   };
-
-  // Scroll to bottom of chat history when chat history updates
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -88,38 +95,57 @@ function ChatBot() {
 
   return (
     <div className="App">
-      {/* <Header /> */}
-      <div className="chat-history" ref={chatContainerRef}>
+      <Header />
+      <div className="chat-history" ref={chatHistoryRef}>
         {chatHistory.map((message, index) => (
           <div key={index} className={`chat-box ${message.sender}`}>
             {message.sender === "user" ? null : (
               <SmartToyOutlinedIcon
                 className="avatar ai-avatar"
                 fontSize="large"
-                style={{ color: "#001080" }}
               />
             )}
             <ReactMarkdown>{message.text}</ReactMarkdown>
-            {/* <span className="time-stamp">{message.timestamp.toString()}</span> */}
+            <div className="product-container">
+              {message.suggested_items?.map((suggestedItem, idx) => (
+                <div key={idx} className="product-card">
+                  <h3>{suggestedItem.title}</h3>
+                  <p>{suggestedItem.description}</p>
+                  <p>{suggestedItem.item_sku}</p>
+                  <h4>Pros:</h4>
+                  <ul>
+                    {suggestedItem.pros.map((pro, index) => (
+                      <li key={index}>{pro}</li>
+                    ))}
+                  </ul>
+                  <h4>Cons:</h4>
+                  <ul>
+                    {suggestedItem.cons.map((con, index) => (
+                      <li key={index}>{con}</li>
+                    ))}
+                  </ul>
+                  <img src={suggestedItem.image_url} alt={`product ${idx}`} />
+                  <button className="cart-button">View product page</button>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
+        <div />
       </div>
       {loading && <div className="loader"></div>}
 
-      {suggestedReplies.length > 0 && (
+      {suggestedReplies.map((reply, index) => (
         <div className="suggested-replies">
-          {suggestedReplies.map((reply, index) => (
-            <button
-              key={index}
-              className="suggested-reply-button"
-              onClick={() => handleSuggestedReplyClick(reply)}
-            >
-              {reply}
-            </button>
-          ))}
+          <button
+            key={index}
+            className="suggested-reply-button"
+            onClick={() => handleSuggestedReplyClick(reply)}
+          >
+            {reply}
+          </button>
         </div>
-      )}
-
+      ))}
       <div className="input-container">
         <input
           className="input-text"
@@ -129,15 +155,10 @@ function ChatBot() {
           placeholder="Type your message..."
           onSubmit={handleSend}
           onKeyDown={handleKeyDown}
-          endAdornment={
-            <InputAdornment position="end">
-              <SearchIcon onClick={handleSend} />
-            </InputAdornment>
-          }
         />
-        <span class="icon">
-          <SearchIcon onClick={handleSend} />
-        </span>
+        <button className="send-button" onClick={handleSend}>
+          Send
+        </button>
       </div>
     </div>
   );
