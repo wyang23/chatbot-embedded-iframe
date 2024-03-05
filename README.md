@@ -1,12 +1,12 @@
-# Embedded conversational interface chatbot
+# Embedded Product Recommender Chatbot
 
-Creating a chatbot that can be integrated using an embedded iframe. This is done by building a conversational interface designed to assist users in finding the right computer or laptop based on their needs and preferences. 
+Creating a chatbot that can be integrated using an embedded iframe. This is done by building a conversational interface designed to assist users in finding the right computer or laptop based on their needs and preferences. Chatbot aims to provide personalized recommendations and assistance to users seeking advice on purchasing a computer or laptop, making the process more interactive and engaging.
 
-Example Use Case provided: Laptop Recommender 
+**Example Use Case provided: Laptop Recommender**
 
-Tech Stack: React + CSS + express.js server
+**Tech Stack: React + CSS + express.js server**
 
-Functionality
+**Functionality**
 
 Introduction Message: The chatbot starts with an introductory message welcoming the user and asking for information about their computer needs or preferences.
 
@@ -23,8 +23,6 @@ Interaction: Users can interact with the chatbot by clicking on suggested replie
 Send Message: Users can send their messages by pressing the "Send" button or hitting the Enter key after typing their message.
 
 Loading Indicator: A loading indicator is displayed while the chatbot is processing user input or fetching data.
-
-Chatbot aims to provide personalized recommendations and assistance to users seeking advice on purchasing a computer or laptop, making the process more interactive and engaging.
 
 Version 2:
 <img width="1193" alt="v2github-1" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/ca44a184-15a9-4d94-868e-e36001440201">
