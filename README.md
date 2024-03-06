@@ -11,13 +11,15 @@ Version 2:
 
 <img width="1193" alt="v2github-2" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/d82ef14b-e68f-46da-898e-00b8e9f39bb2">
 
+Version 2 Demo Video:
 
+https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/15dfd24d-0f30-484e-a239-bb9e40b66958
 
 Version 1:
 
 <img width="1483" alt="Screenshot 2024-02-27 at 4 21 22 pm" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/94d9b94e-6a9d-49f4-a105-1f3f75ef1a74">
 
-**Functionality/Component Breakdown**
+# Functionality and Component Breakdown
 
 **Send Message/Chat History:** The chat history displays the conversation between the user and the chatbot, including messages exchanged and any suggested items provided by the chatbot. Users can send their messages by pressing the "Send" button or hitting the Enter key after typing their message.
 
