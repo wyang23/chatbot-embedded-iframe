@@ -1,21 +1,40 @@
-# Embedded chatbot
+# Embedded Product Recommender Chatbot
 
-Creating a chatbot that can be integrated using an embedded iframe
+Creating a chatbot that can be integrated using an embedded iframe. This is done by building a conversational interface designed to assist users in finding the right computer or laptop based on their needs and preferences. Chatbot aims to provide personalized recommendations and assistance to users seeking advice on purchasing a computer or laptop, making the process more interactive and engaging.
 
-Example Use Case provided: Laptop Recommender 
+**Example Use Case provided: Laptop Recommender**
 
-Tech Stack: React + CSS + express.js server
+**Tech Stack: React + CSS + express.js server**
 
 Version 2:
 <img width="1193" alt="v2github-1" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/ca44a184-15a9-4d94-868e-e36001440201">
 
 <img width="1193" alt="v2github-2" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/d82ef14b-e68f-46da-898e-00b8e9f39bb2">
 
+Version 2 Demo Video:
 
+https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/15dfd24d-0f30-484e-a239-bb9e40b66958
 
 Version 1:
 
 <img width="1483" alt="Screenshot 2024-02-27 at 4 21 22 pm" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/94d9b94e-6a9d-49f4-a105-1f3f75ef1a74">
+
+# Functionality and Component Breakdown
+
+**Send Message/Chat History:** The chat history displays the conversation between the user and the chatbot, including messages exchanged and any suggested items provided by the chatbot. Users can send their messages by pressing the "Send" button or hitting the Enter key after typing their message.
+
+<img width="1178" alt="image" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/eb2a9aa3-c865-40f8-abdc-c4ab83bc132c">
+
+**Product Suggestions:** Based on the user's input and preferences, the chatbot provides suggestions for suitable computers or laptops. These suggestions include information such as product title, description, SKU, pros, cons, and an image.
+
+<img width="270" alt="product card" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/4001abb2-5ac7-4f93-9e1c-c0c020c09c63">
+
+**User Input:** Users can input their messages or responses to the chatbot's prompts using the text input field provided.
+
+**Suggested Replies:** The chatbot may also offer suggested replies or follow-up questions to guide the conversation and provide further assistance.
+
+<img width="1180" alt="Screenshot 2024-03-06 at 11 44 09 am" src="https://github.com/wyang23/chatbot-embedded-iframe/assets/92281375/1a233181-3793-42c7-a7f8-2949d6b7e57d">
+
 
 # Mock API Express Server
 
