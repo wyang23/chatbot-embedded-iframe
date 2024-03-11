@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Chatbot.css";
-import ReactMarkdown from "react-markdown";
-import SmartToyOutlinedIcon from "@mui/icons-material/SmartToyOutlined";
 import { Header } from "./Header";
+import ChatMessage from "./ChatMessage";
 
 function ChatBot() {
   const [userInput, setUserInput] = useState("");
@@ -97,44 +96,11 @@ function ChatBot() {
     <div className="App">
       <Header />
       <div className="chat-history" ref={chatHistoryRef}>
-        {chatHistory.map((message, index) => (
-          <div key={index} className={`chat-box ${message.sender}`}>
-            {message.sender === "user" ? null : (
-              <SmartToyOutlinedIcon
-                className="avatar ai-avatar"
-                fontSize="large"
-              />
-            )}
-            <ReactMarkdown>{message.text}</ReactMarkdown>
-            <div className="product-container">
-              {message.suggested_items?.map((suggestedItem, idx) => (
-                <div key={idx} className="product-card">
-                  <h3>{suggestedItem.title}</h3>
-                  <p>{suggestedItem.description}</p>
-                  <p>{suggestedItem.item_sku}</p>
-                  <h4>Pros:</h4>
-                  <ul>
-                    {suggestedItem.pros.map((pro, index) => (
-                      <li key={index}>{pro}</li>
-                    ))}
-                  </ul>
-                  <h4>Cons:</h4>
-                  <ul>
-                    {suggestedItem.cons.map((con, index) => (
-                      <li key={index}>{con}</li>
-                    ))}
-                  </ul>
-                  <img src={suggestedItem.image_url} alt={`product ${idx}`} />
-                  <button className="cart-button">View product page</button>
-                </div>
-              ))}
-            </div>
-          </div>
+        {chatHistory.map((message) => (
+          <ChatMessage message={message} />
         ))}
-        <div />
       </div>
       {loading && <div className="loader"></div>}
-
       {suggestedReplies.map((reply, index) => (
         <div className="suggested-replies">
           <button

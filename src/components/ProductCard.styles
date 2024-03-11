@@ -1,0 +1,15 @@
+.header {
+    background-color: blue;
+    color: darkblue;
+    padding: 0px 10px;
+    align-items: center;
+ 
+ }
+ 
+ h1 {
+     color: white;
+     text-align: center;
+ }
+
+ 
+ 
